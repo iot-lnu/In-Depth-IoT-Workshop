@@ -1,8 +1,13 @@
-
-###### tags: `TA Stuff`
-
 ### Table of Contents
-[TOC]
++ [Table of Contents](#table-of-contents)
+- [The Things Stack (TTS)](#the-things-stack--tts-)
+* [1. Register](#1-register)
+* [2. Create an application](#2-create-an-application)
+* [3. Add the pycom device to the application](#3-add-the-pycom-device-to-the-application)
+* [4. Connect to TTS using your pycom device](#4-connect-to-tts-using-your-pycom-device)
+* [5. Send messages with TTS](#5-send-messages-with-tts)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 # The Things Stack (TTS)
 

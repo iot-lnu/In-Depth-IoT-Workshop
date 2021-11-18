@@ -20,10 +20,10 @@ import ubinascii
 lora = LoRa(mode=LoRa.LORAWAN, region=LoRa.EU868)
 
 # create an OTAA authentication parameters, change them to the provided credentials
-app_eui = ubinascii.unhexlify(‘0000000000000000’)
-app_key = ubinascii.unhexlify(‘EE15ED5FE25DBF767E4A57B8E644C99C’)
+app_eui = ubinascii.unhexlify('0000000000000000')
+app_key = ubinascii.unhexlify('BE02CDDD6E7FBF4C1505895FA445AF4F')
 #uncomment to use LoRaWAN application provided dev_eui
-dev_eui = ubinascii.unhexlify(‘70B3D549938EA1EE’)
+dev_eui = ubinascii.unhexlify('70B3D5499BD61187')
 
 # Uncomment for US915 / AU915 & Pygate
 # for i in range(0,8):
@@ -41,9 +41,9 @@ lora.join(activation=LoRa.OTAA, auth=(app_eui, app_key), timeout=0)
 # wait until the module has joined the network
 while not lora.has_joined():
     time.sleep(2.5)
-    print(‘Not yet joined...’)
+    print('Not yet joined...')
 
-print(‘Joined’)
+print('Joined')
 # create a LoRa socket
 s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
 

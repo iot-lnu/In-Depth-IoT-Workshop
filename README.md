@@ -12,7 +12,7 @@
 # The Things Stack (TTS)
 
 :::danger
-**⚠️ Important ⚠️ Make sure the LoRa antenna is connected properly before running any LoRa or Sigfox code on your device. Not doing so might break your device.** You can find how to properly connect the antenna [here](#Connect-the-antenna).
+**⚠️ Important ⚠️ Make sure the LoRa antenna is connected properlym before running any LoRa or Sigfox code on your device. Not doing so might break your device.** You can find how to properly connect the antenna [here](#Connect-the-antenna).
 :::
 
 ## 1. Register

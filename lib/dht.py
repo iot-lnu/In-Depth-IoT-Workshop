@@ -4,7 +4,7 @@ import pycom
 from machine import enable_irq, disable_irq,  Pin
 
 class DHTResult:
-    ‘DHT sensor result returned by DHT.read() method’
+    'DHT sensor result returned by DHT.read() method'
 
     ERR_NO_ERROR = 0
     ERR_MISSING_DATA = 1
@@ -24,9 +24,9 @@ class DHTResult:
 
 
 class DHT:
-    ‘DHT sensor (dht11, dht21,dht22) reader class for Pycom’
+    'DHT sensor (dht11, dht21,dht22) reader class for Pycom'
 
-    #__pin = Pin(‘P3’, mode=Pin.OPEN_DRAIN)
+    #__pin = Pin('P3', mode=Pin.OPEN_DRAIN)
     __dhttype = 0
 
     def __init__(self, pin, sensor=0):
@@ -48,7 +48,7 @@ class DHT:
         		bits.append(0)
         	if a ==1 and 65 <= b <= 75:
         		bits.append(1)
-        #print(“longueur bits : %d ” % len(bits))
+        #print("longueur bits : %d " % len(bits))
         if len(bits) != 40:
             return DHTResult(DHTResult.ERR_MISSING_DATA, 0, 0)
         #print(bits)

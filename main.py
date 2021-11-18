@@ -26,8 +26,8 @@ while True:
     Payload format is: >bb BB HHHH HHHH HHHH where
     b = Temperature         (1 byte,  8 bits,  signed)       Range: -128 to 127
     B = Humidity            (1 byte,  8 bits,  unsigned)     Range: 0 to 255
-    H = Pressure            (2 bytes, 16 bits, unsigned)     Range: 0 to 65,535
-    H = Air Quality         (2 bytes, 16 bits, unsigned)     Range: 0 to 65,535
+    H =                     (2 bytes, 16 bits, unsigned)     Range: 0 to 65,535
+    h =                     (2 bytes, 16 bits, signed)       Range: -32,768 to 32,767
     """
     package = struct.pack('>bB',
                             int(temp),

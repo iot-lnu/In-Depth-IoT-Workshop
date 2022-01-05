@@ -32,6 +32,6 @@ while True:
     package = struct.pack('>bB',
                             int(temp),
                             int(humidity))
-    s.send(package)
+    # s.send(package)
 
     time.sleep(60)

@@ -13,7 +13,7 @@ lora = LoRa(mode=LoRa.LORAWAN, region=LoRa.EU868)
 
 # create an OTAA authentication parameters, change them to the provided credentials
 app_eui = ubinascii.unhexlify('0000000000000000')
-app_key = ubinascii.unhexlify('BE02CDDD6E7FBF4C1505895FA445AF4F')
+app_key = ubinascii.unhexlify('C67B44BF64EC6D5E83CBC53152EC1461')
 # dev_eui = ubinascii.unhexlify('70B3D5499BD61187')
 
 lora.join(activation=LoRa.OTAA, auth=(app_eui, app_key), timeout=0)

@@ -1,42 +1,29 @@
-from network import LoRa
-import binascii
-print("#################################")
-print(binascii.hexlify(LoRa().mac()).upper())
-print("#################################")
-
-from network import LoRa
-import socket
-import time
+from network import WLAN
+from mqtt import MQTTClient
 import ubinascii
+import constants as CONST
+import machine
 
-lora = LoRa(mode=LoRa.LORAWAN, region=LoRa.EU868)
+# WiFi Setup
+client_id = ubinascii.hexlify(machine.unique_id())
+print(client_id)
+wlan = WLAN(mode=WLAN.STA)
+wlan.connect(CONST.WIFI_SSID, auth=(WLAN.WPA2, CONST.WIFI_PASS), timeout=5000)
 
-# create an OTAA authentication parameters, change them to the provided credentials
-app_eui = ubinascii.unhexlify('0000000000000000')
-app_key = ubinascii.unhexlify('C67B44BF64EC6D5E83CBC53152EC1461')
-# dev_eui = ubinascii.unhexlify('70B3D5499BD61187')
+while not wlan.isconnected():
+    machine.idle()
+print('Connected to WiFi\n')
 
-lora.join(activation=LoRa.OTAA, auth=(app_eui, app_key), timeout=0)
+# MQTT Setup
+def sub_cb(topic, msg):
+   print(msg)
 
-# wait until the module has joined the network
-counter = 0
+client = MQTTClient(client_id,
+                    CONST.DATACAKE_MQTT_URL,
+                    user=CONST.DATACAKE_TOKEN,
+                    password=CONST.DATACAKE_TOKEN,
+                    port=CONST.DATACAKE_MQTT_PORT)
 
-while not lora.has_joined():
-    time.sleep(2.5)
-    print('Not yet joined...')
-    counter += 1
-    if counter == 10:
-        break
-
-if counter < 10:
-    print('Joined')
-
-    # create a LoRa socket
-    s = socket.socket(socket.AF_LORA, socket.SOCK_RAW)
-
-    # set the LoRaWAN data rate
-    s.setsockopt(socket.SOL_LORA, socket.SO_DR, 5)
-
-    # make the socket blocking
-    # (waits for the data to be sent and for the 2 receive windows to expire)
-    s.setblocking(True)
+client.set_callback(sub_cb)
+client.connect()
+print('connected to MQTT server')

@@ -1,14 +1,14 @@
-# Data is sent to Pybytes. Needs to flashed with Pybyte firmware
 import time
-from machine import Pin
+import ujson
+import constants as CONST
 from dht import DHT # https://github.com/JurassicPork/DHT_PyCom
-import struct
-
-# Type 0 = dht11
-# Type 1 = dht22
+from machine import Pin
 
 th = DHT(Pin('P23', mode=Pin.OPEN_DRAIN), 0)
 time.sleep(1)
+
+temp_topic = CONST.DATACAKE_MQTT_TOPIC + "TEMPERATURE"
+humi_topic = CONST.DATACAKE_MQTT_TOPIC + "HUMIDITY"
 
 while True:
     result = th.read()
@@ -22,17 +22,8 @@ while True:
 
     print('Temperature:', temperature, 'Humidity:', humidity)
 
-    """
-    Prepare the data by packing it before sending it to sigfox
-    Payload format is: >bb BB HHHH HHHH HHHH where
-    b =                     (1 byte,  8 bits,  signed)       Range: -128 to 127
-    B = Humidity            (1 byte,  8 bits,  unsigned)     Range: 0 to 255
-    H =                     (2 bytes, 16 bits, unsigned)     Range: 0 to 65,535
-    h = Temperature         (2 bytes, 16 bits, signed)       Range: -32,768 to 32,767
-    """
-    package = struct.pack('>hB',
-                            int(temperature),
-                            int(humidity))
-    # s.send(package)
+    client.publish(topic=temp_topic, msg=str(temperature))
+    time.sleep(0.1)
+    client.publish(topic=humi_topic, msg=str(humidity))
 
     time.sleep(60)

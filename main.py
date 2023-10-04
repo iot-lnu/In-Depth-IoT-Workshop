@@ -1,29 +1,20 @@
+import pycom
 import time
-import ujson
-import constants as CONST
-from dht import DHT # https://github.com/JurassicPork/DHT_PyCom
 from machine import Pin
+from dht import DTH
 
-th = DHT(Pin('P23', mode=Pin.OPEN_DRAIN), 0)
-time.sleep(1)
-
-temp_topic = CONST.DATACAKE_MQTT_TOPIC + "TEMPERATURE"
-humi_topic = CONST.DATACAKE_MQTT_TOPIC + "HUMIDITY"
+pycom.heartbeat(False)
+pycom.rgbled(0x000008) # blue
+th = DTH(Pin('P23', mode=Pin.OPEN_DRAIN),0)
+time.sleep(2)
 
 while True:
     result = th.read()
-    while not result.is_valid():
-        time.sleep(.5)
-        print("Not valid")
-        result = th.read()
+    if result.is_valid():
+        pycom.rgbled(0x001000) # green
+        print("Temperature: %d C" % result.temperature)
+        print("Humidity: %d %%" % result.humidity)
 
-    temperature = result.temperature
-    humidity = result.humidity
-
-    print('Temperature:', temperature, 'Humidity:', humidity)
-
-    client.publish(topic=temp_topic, msg=str(temperature))
-    time.sleep(0.1)
-    client.publish(topic=humi_topic, msg=str(humidity))
-
-    time.sleep(60)
+        # send some data
+        s.send(bytes([result.temperature, result.humidity]))
+    time.sleep(30)  

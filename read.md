@@ -3,7 +3,7 @@ To create a new project, navigate to the `Pymakr` icon in the left menu, then cl
 
 ![Alt text](/images/i3.png)
 
-You will be promped to confirm the project name, just press `Enter`. 
+You will be prompted to confirm the project name, just press `Enter`. 
 ![Alt text](/images/i5.png)
 
 A popup in VSCode will appear giving you two options, an `empty` project or a `led-example`. Select `empty` project and press `Enter`. 

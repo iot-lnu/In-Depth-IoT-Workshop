@@ -1,5 +1,5 @@
 ### 1. Register
-Before you can start using TTS, you need to [create a TTS account](https://account.thethingsnetwork.org/register). Once you have done that, go ahead and navigate to Console.
+Before you can start using TTS, you need to [create a TTS account](https://www.thethingsnetwork.org/get-started). Once you have done that, go ahead and navigate to Console.
 
 ![](https://i.imgur.com/eb22wU8.png)
 
